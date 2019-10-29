@@ -8,7 +8,8 @@ SRCS = IDBrillMoL_RegisterVars.c  \
        calc_rhs.c    \
        boundaries.c  \
        InitSymBound.c  \
-       setupbrilldata.c
+       setupbrilldata.c \
+       check_tolerance.cc
 
 
 # Subdirectories containing source files

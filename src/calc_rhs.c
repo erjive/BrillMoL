@@ -2,6 +2,7 @@
 #include "cctk_Arguments.h"
 #include "cctk_Parameters.h"
 #include "math.h"
+#include "Boundary.h"
 void calc_rhs(CCTK_ARGUMENTS)
 
 /* Calculate the rhs of the wave-like equation
@@ -18,7 +19,6 @@ for the conformal factor of Brill waves.*/
   int istart, jstart, kstart, iend, jend, kend;
   CCTK_REAL dx,dy,dz,dx2,dy2,dz2;
   CCTK_REAL dx2i,dy2i,dz2i;
-  CCTK_REAL x1,y1,z1,rho1;
   CCTK_REAL itwelfth,fthird,fivehalf;
 
   /* Set up shorthands */
@@ -109,12 +109,22 @@ void calc_rhs_bdry(CCTK_ARGUMENTS)
   DECLARE_CCTK_ARGUMENTS;
   DECLARE_CCTK_PARAMETERS;
 /*  DECLARE_CCTK_FUNCTIONS;*/
-
+  int sw[3];
   int ierr=-1;
+
+  /*Stencil width */
+
+  sw[0]=1;
+  sw[1]=1;
+  sw[2]=1;
 
 /*  ierr = NewRad_Apply(cctkGH, pi, rhs_pi, 1.0, 1.0, n_brill);*/
     ierr = NewRad_Apply(cctkGH, pi, rhs_pi, 0.0, 1.0, n_brill);
+/*    ierr = BndRadiativeVN(cctkGH,sw,0.0,1.0,"IDBrillMoL::pi","IDBrillMoL::pi");*/
+/*    ierr = BndRadiativeDirVN(cctkGH,1,1,0.0,1.0,"IDBrillMoL::pi","IDBrillMoL::pi");*/
+/*    ierr = BndRadiativeDirVN(cctkGH,1,1,0.0,1.0,"IDBrillMoL::pi","IDBrillMoL::pi");*/
 
+/*    ierr = BndRadiativeDirVN(cctkGH,sw,3,0.0,1.0,"IDBrillMoL::pi","IDBrillMoL::pi");*/
   if (ierr<0)
   {
       CCTK_WARN(0,"Boundary conditions not applied - Radiative Bcs not applied!");

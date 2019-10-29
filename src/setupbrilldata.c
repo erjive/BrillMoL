@@ -58,7 +58,7 @@ for the conformal factor of Brill waves.*/
                else if (CCTK_EQUALS(q_function,"gundlach"))
                {
                   brillsource[index] = (0.5*gundlacha/(pow(gundlachsigmar,4)*pow(gundlachsrho,2)) *
-                                       exp(-(pow(rho1,2) + pow(z1,2) - pow(gundlachr0,2) )/pow(gundlachsigmar,2)) *
+                                       expf(-(pow(rho1,2) + pow(z1,2) - pow(gundlachr0,2) )/pow(gundlachsigmar,2)) *
                                        (pow(gundlachsigmar,4) - 6.*pow(gundlachsigmar,2)*pow(rho1,2) +
                                        2.*pow(rho1,4) + 2.*pow(rho1,2)*pow(z1,2)));
                }

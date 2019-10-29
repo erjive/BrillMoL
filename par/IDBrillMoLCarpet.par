@@ -76,7 +76,7 @@ ReflectionSymmetry::avoid_origin_x   = no
 ReflectionSymmetry::avoid_origin_y   = no
 ReflectionSymmetry::avoid_origin_z   = no
 
-Time::dtfac                          = 0.5
+Time::dtfac                          = 0.55
 
 
 # Initial Data
@@ -96,6 +96,11 @@ CarpetRegrid2::radius_1[1]  = 5.0
 #CarpetRegrid2::radius_1[3]  = 1.5
 #CarpetRegrid2::radius_1[4]  = 0.75
 
+Carpet::prolongation_order_space        = 3
+Carpet::prolongation_order_time         = 2
+#CarpetLib::use_higher_order_restriction = yes
+#CarpetLib::restriction_order_space      = 3
+#Carpet::no_split_direction              = 2 # avoid empty line confusing test system
 
 # Evolution
 #------------------------------------------------------------------------------
@@ -118,17 +123,18 @@ CarpetLib::poison_new_memory  = yes
 
 # Brill parameters
 #-------------------------------------------------------------------------------
+IDBrillMoL :: n_brill          = 4
+IDBrillMoL::k_damping          = 0.0
+IDBrillMoL::tol_pi             = 1e-8
 
-IDBrillMoL::k_damping          = 0.05
-
-ActiveThorns = "Dissipation SpaceMask SphericalSurface "
+#ActiveThorns = "Dissipation SpaceMask SphericalSurface "
 
 # Dissipation
 #-------------------------------------------------------------------------------
 
-Dissipation::order = 7
-Dissipation::epsdis   = 0.05
-Dissipation::vars = "IDBrillMoL::phi IDBrillMol::pi"
+#Dissipation::order = 7
+#Dissipation::epsdis   = 0.05
+#Dissipation::vars = "IDBrillMoL::phi IDBrillMol::pi"
 
 # I/O thorns
 #-------------------------------------------------------------------------------
@@ -137,7 +143,7 @@ Cactus::cctk_run_title       = $parfile
 
 IO::out_dir                  = $parfile
 
-IOBasic::outInfo_every       = 50
+IOBasic::outInfo_every       = 100
 IOBasic::outInfo_vars        = "IDBrillMoL::pi"
 
 
@@ -151,10 +157,17 @@ IOASCII::out1D_d                = yes
 IOASCII::out1D_x                = yes
 IOASCII::out1D_y                = yes
 IOASCII::out1D_z                = yes
-IOASCII::out1D_vars             = "IDBrillMoL::scalarevolvemol"
+#IOASCII::out1D_vars             = "IDBrillMoL::scalarevolvemol"
 #IOASCII::outScalar_vars         = "IDBrillMoL::scalarevolvemol"
 
 CarpetIOASCII::compact_format = false
+
+#Checkpoint
+#ActiveThorns ="IOHDF5Util IOHDF5"
+IOHDF5::checkpoint           = yes
+IO::checkpoint_dir           = $parfile
+IO::checkpoint_on_terminate  = yes
+IO::checkpoint_file          = "brillpsi"
 
 # Run termination
 #-------------------------------------------------------------------------------

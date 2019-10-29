@@ -3,6 +3,7 @@
 implements: IDBrillMoL
 inherits: grid Boundary
 
+#INCLUDES HEADER: Boundary.h in Boundary.h
 
 CCTK_INT FUNCTION                        \
     Boundary_SelectVarForBC            \
@@ -23,6 +24,16 @@ CCTK_INT FUNCTION                        \
          CCTK_STRING IN group_name,      \
          CCTK_STRING IN bc_name)
 REQUIRES FUNCTION Boundary_SelectGroupForBC
+
+#CCTK_INT FUNCTION                       \
+#    BndRadiativeVN                      \
+#    (CCTK_POINTER_TO_CONST IN cctkGH,   \
+#     CCTK_INT IN stencil_size,          \
+#     CCTK_REAL IN limit,                \
+#     CCTK_REAL IN speed,                \
+#     CCTK_STRING IN variable_name,      \
+#     CCTK_STRING IN variable_name_past)
+#REQUIRES FUNCTION BnRadiativeVN
 
 CCTK_INT FUNCTION                         \
     NewRad_Apply                          \

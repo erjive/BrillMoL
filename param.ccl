@@ -55,3 +55,7 @@ CCTK_REAL k_damping "Damping coefficient for the wave-like equation"
   0:1.0 :: ""
 } 0.05
 
+CCTK_REAL tol_pi "Tolerance for the conformal factor"
+{
+  0:* ::""
+} 1e-9

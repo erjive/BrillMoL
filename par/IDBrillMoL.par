@@ -56,20 +56,20 @@ grid::avoid_origin = "yes"
 #CoordBase::xmin                      =    0.0
 #CoordBase::ymin                      =    0.0
 #CoordBase::zmin                      =    0.0
-#CoordBase::xmax                      =   5.0
-#CoordBase::ymax                      =   5.0
-#CoordBase::zmax                      =   5.0
+#CoordBase::xmax                      =   6.0
+#CoordBase::ymax                      =   6.0
+#CoordBase::zmax                      =   6.0
 #CoordBase::dx                        =    0.1
 #CoordBase::dy                        =    0.1
 #CoordBase::dz                        =    0.1
 
 
-driver::global_nx 				= 200
-driver::global_ny 				= 200
-driver::global_nz 				= 200
+driver::global_nx 				= 100
+driver::global_ny 				= 100
+driver::global_nz 				= 100
 
 grid::type 					= "byspacing"
-grid::dxyz 					= 0.05
+grid::dxyz 					= 0.1
 grid::domain 					= "octant"
 
 
@@ -93,11 +93,13 @@ CoordBase::boundary_shiftout_z_lower = 1
 #ReflectionSymmetry::avoid_origin_y   = no
 #ReflectionSymmetry::avoid_origin_z   = no
 
-Time::dtfac                          = 0.5
+Time::dtfac                          = 0.55
 
 
 # Initial Data
 #------------------------------------------------------------------------------
+
+IDBrillMoL :: n_brill = 2
 
 InitBase::initial_data_setup_method   = "init_some_levels"
 #Carpet::init_fill_timelevels          = yes
@@ -136,14 +138,15 @@ MethodOfLines::MoL_NaN_Check    = "no"
 #-------------------------------------------------------------------------------
 
 IDBrillMoL::k_damping          = 0.0
+IDBrillMoL::tol_pi             = 1e-10
 
-ActiveThorns = "Dissipation SpaceMask SphericalSurface "
+#ActiveThorns = "Dissipation SpaceMask SphericalSurface "
 
 # Dissipation
 #-------------------------------------------------------------------------------
 
 #Dissipation::order = 7
-#Dissipation::epsdis   = 0.00625
+#Dissipation::epsdis   = 0.01
 #Dissipation::vars = "IDBrillMoL::phi IDBrillMol::pi"
 
 # I/O thorns
@@ -153,7 +156,7 @@ Cactus::cctk_run_title       = $parfile
 
 IO::out_dir                  = $parfile
 
-IOBasic::outInfo_every       = 10
+IOBasic::outInfo_every       = 20
 IOBasic::outInfo_vars        = "IDBrillMoL::pi"
 
 
@@ -167,13 +170,20 @@ IOASCII::out1D_d                = yes
 IOASCII::out1D_x                = yes
 IOASCII::out1D_y                = yes
 IOASCII::out1D_z                = yes
-IOASCII::out1D_vars             = "IDBrillMoL::scalarevolvemol IDBrillMoL::Brillsrc"
-#IOASCII::outScalar_vars         = "IDBrillMoL::scalarevolvemol IDBrillMoL::Brillsrc"
+IOASCII::out1D_vars             = "IDBrillMoL::scalarevolvemol"
+#IOASCII::outScalar_vars        = "IDBrillMoL::scalarevolvemol"
 
 #CarpetIOASCII::compact_format = yes
+
+ActiveThorns ="IOHDF5Util IOHDF5"
+IOHDF5::checkpoint           = yes
+IO::checkpoint_dir           = $parfile
+IO::checkpoint_on_terminate  = yes
+IO::checkpoint_file          = "IDBrillMoL"
 
 # Run termination
 #-------------------------------------------------------------------------------
 
 Cactus::terminate       = "iteration"
-Cactus::cctk_itlast     = 5000
+Cactus::cctk_itlast     = 1000
+

@@ -5,6 +5,7 @@
   STORAGE: rhsscalar
   STORAGE: Brillsrc
 
+
   schedule IDBrillMoL_InitSymBound at BASEGRID
   {
     LANG: C
@@ -55,3 +56,9 @@
   schedule GROUP ApplyBCs as Brill_ApplyBCs in MoL_PostStep after boundaries
   {
   } "Apply boundary conditions"
+
+  schedule tolerance in MoL_PostStep after Brill_ApplyBCs
+  {
+    LANG: C
+  } "Check if we reach the tolerance"
+
