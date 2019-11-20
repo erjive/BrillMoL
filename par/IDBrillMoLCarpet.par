@@ -89,18 +89,19 @@ Carpet::init_3_timelevels             = yes
 # AMR
 #------------------------------------------------------------------------------
 Carpet::max_refinement_levels = 3
+Carpet::time_refinement_factors = "[1, 2, 4]"
 CarpetRegrid2::num_centres  = 1
-CarpetRegrid2::num_levels_1 = 2
+CarpetRegrid2::num_levels_1 = 3
 CarpetRegrid2::radius_1[1]  = 5.0
-#CarpetRegrid2::radius_1[2]  = 1.0
+CarpetRegrid2::radius_1[2]  = 2.5
 #CarpetRegrid2::radius_1[3]  = 1.5
 #CarpetRegrid2::radius_1[4]  = 0.75
 
-Carpet::prolongation_order_space        = 3
+Carpet::prolongation_order_space        = 5
 Carpet::prolongation_order_time         = 2
-#CarpetLib::use_higher_order_restriction = yes
-#CarpetLib::restriction_order_space      = 3
-#Carpet::no_split_direction              = 2 # avoid empty line confusing test system
+CarpetLib::use_higher_order_restriction = yes
+CarpetLib::restriction_order_space      = 3
+Carpet::no_split_direction              = 2 # avoid empty line confusing test system
 
 # Evolution
 #------------------------------------------------------------------------------
@@ -123,6 +124,7 @@ CarpetLib::poison_new_memory  = yes
 
 # Brill parameters
 #-------------------------------------------------------------------------------
+IDBrillMoL :: gundlacha        = 12.0
 IDBrillMoL :: n_brill          = 4
 IDBrillMoL::k_damping          = 0.0
 IDBrillMoL::tol_pi             = 1e-8
@@ -132,8 +134,8 @@ IDBrillMoL::tol_pi             = 1e-8
 # Dissipation
 #-------------------------------------------------------------------------------
 
-#Dissipation::order = 7
-#Dissipation::epsdis   = 0.05
+#Dissipation::order = 5
+#Dissipation::epsdis   = 0.01
 #Dissipation::vars = "IDBrillMoL::phi IDBrillMol::pi"
 
 # I/O thorns
@@ -157,7 +159,7 @@ IOASCII::out1D_d                = yes
 IOASCII::out1D_x                = yes
 IOASCII::out1D_y                = yes
 IOASCII::out1D_z                = yes
-#IOASCII::out1D_vars             = "IDBrillMoL::scalarevolvemol"
+IOASCII::out1D_vars             = "IDBrillMoL::scalarevolvemol"
 #IOASCII::outScalar_vars         = "IDBrillMoL::scalarevolvemol"
 
 CarpetIOASCII::compact_format = false
@@ -173,4 +175,4 @@ IO::checkpoint_file          = "brillpsi"
 #-------------------------------------------------------------------------------
 
 Cactus::terminate       = "iteration"
-Cactus::cctk_itlast     = 20500
+Cactus::cctk_itlast     = 20000

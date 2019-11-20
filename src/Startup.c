@@ -12,11 +12,11 @@
 
 static const char *rcsid = "$Header$";
 
-CCTK_FILEVERSION(CactusExamples_WaveMoL_Startup_c)
+//CCTK_FILEVERSION(CactusExamples_WaveMoL_Startup_c)
 
 int IDBrillMoL_Startup(void);
 
-int WaveMoL_Startup(void)
+int IDBrillMoL_Startup(void)
 {
 
    const char *banner = "IDBrillMoL: Quick and dirty elliptic solver for the conformal factor of Brill waves";
