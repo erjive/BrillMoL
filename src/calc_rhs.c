@@ -54,6 +54,7 @@ for the conformal factor of Brill waves.*/
   printf("About to loop.\n");
 #endif
 
+  #pragma omp parallel for collapse(3) private(i,j,k,index)
   for (k=kstart; k<kend; k++)
   {
     for (j=jstart; j<jend; j++)
