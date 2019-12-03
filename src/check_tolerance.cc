@@ -55,7 +55,8 @@ void tolerance(CCTK_ARGUMENTS)
               for(int j=1;j<cctk_lsh[1];j++) {
                 for(int i=1;i<cctk_lsh[0];i++) {
                   int index= CCTK_GFINDEX3D(cctkGH,i,j,k);
-                  lres += abs(phi[index]-phi_p[index]);
+                  //lres += fabs(phi[index]-phi_p[index]);
+                  lres += fabs(phi[index]-phi_p[index])/cctk_delta_time;
                 }
               }
             }

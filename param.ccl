@@ -59,3 +59,13 @@ CCTK_REAL tol_pi "Tolerance for the conformal factor"
 {
   0:* ::""
 } 1e-9
+
+BOOLEAN read_idata "Read initial condition from a file"
+{
+} "no"
+
+STRING ic_file "Initial condition file"
+{
+  ".+" :: "A valid file name"
+  "^$" :: "An empty string to choose the default from IO::out_dir"
+} ""

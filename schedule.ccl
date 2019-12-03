@@ -17,7 +17,7 @@
     LANG: C
   } "set all rhs functions to zero to prevent spurious nans"
 
-  schedule initial_conditions at CCTK_INITIAL
+  schedule initial_conditions at CCTK_POSTINITIAL
   {
     LANG: C
   } "Initial data for wave-like equation"

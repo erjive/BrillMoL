@@ -49,12 +49,12 @@ CoordBase::domainsize                = "minmax"
 CoordBase::xmin                      =    0.0
 CoordBase::ymin                      =    0.0
 CoordBase::zmin                      =    0.0
-CoordBase::xmax                      =    10.0
-CoordBase::ymax                      =    10.0
-CoordBase::zmax                      =    10.0
-CoordBase::dx                        =    0.1
-CoordBase::dy                        =    0.1
-CoordBase::dz                        =    0.1
+CoordBase::xmax                      =    5.0
+CoordBase::ymax                      =    5.0
+CoordBase::zmax                      =    5.0
+CoordBase::dx                        =    0.05
+CoordBase::dy                        =    0.05
+CoordBase::dz                        =    0.05
 
 driver::ghost_size                   = 4
 
@@ -85,6 +85,12 @@ Time::dtfac                          = 0.55
 #InitBase::initial_data_setup_method   = "init_some_levels"
 #Carpet::init_fill_timelevels          = yes
 Carpet::init_3_timelevels             = yes
+
+IDBrillMoL::read_idata  = no
+
+#IO::filereader_ID_dir   = "/home/erik/simulations/IDBrilla5/output-0000/IDBrillMoLCarpet/"
+#IO::filereader_ID_files = "brillpsi.it_2840"
+#IO::filereader_ID_vars  = "IDBrillMoL::phi IDBrillMoL::pi"
 
 # AMR
 #------------------------------------------------------------------------------
